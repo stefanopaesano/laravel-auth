@@ -41,7 +41,7 @@
             <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $project->date) }}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Aggiorna</button>
+        <input type="submit" class="btn btn-primary" value="Modifica">
     </form>
 </div>
 @endsection

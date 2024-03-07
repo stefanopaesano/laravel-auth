@@ -21,11 +21,11 @@ use App\Http\Controllers\Admin\ProjectController;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('home');
-Route::get('/projects/create', [ProjectController::class, 'create'])->name('project.create');
-Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('project.edit');
-Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('project.destroy');
-Route::resource('admin/projects', ProjectController::class);
-Route::put('/admin/projects/{project}', [AdminProjectController::class, 'update'])->name('admin.projects.update');
+
+Route::delete('/projects/{project}', 'ProjectController@destroy')->name('projects.destroy');
+Route::put('/admin/projects/{slug}', 'ProjectController@update')->name('admin.projects.update');
+
+
 
 Route::prefix('projects')
     ->name('projects.')
@@ -33,6 +33,7 @@ Route::prefix('projects')
 
     Route::get('/', [GuestProjectController::class, 'index'])->name('index');
     Route::get('/{project}', [GuestProjectController::class, 'show'])->name('show');
+   
     
 });
 
@@ -44,7 +45,11 @@ Route::prefix('admin')
     Route::get('/dashboard', [AdminMainController::class, 'dashboard'])->name('dashboard');
    
     Route::resource('projects', AdminProjectController::class);
+   
+
+    
     
 });
+
 
 require __DIR__.'/auth.php';

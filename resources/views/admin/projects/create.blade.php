@@ -3,6 +3,8 @@
 @section('page-title', 'Tutti i projects')
 
 @section('main-content')
+
+
 <div class="container">
     <h2>{{ isset($project) ? 'Edit' : 'Create' }} Project</h2>
 
@@ -15,6 +17,8 @@
             </ul>
         </div>
     @endif
+
+    
     <form method="POST" action="{{ route('admin.projects.store') }}">
         @csrf
         

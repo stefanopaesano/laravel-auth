@@ -76,7 +76,7 @@ class ProjectController extends Controller
         // Anche qui, la validazione è avvenuta
         $validated = $request->validated();
         $project->update($validated);
-        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
+        return redirect()->route('admin.projects.index')->with('success', 'Progetto aggiornato con successo.');
     }
 
     /**

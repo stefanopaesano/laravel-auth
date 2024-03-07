@@ -3,76 +3,45 @@
 @section('page-title', 'Tutti i project')
 
 @section('main-content')
-<h1>
-    projects Index
-</h1>
+    <h1>Projects Index</h1>
 
-<h2>
     <div class="row">
-        <table class="table">
-        <div class="mb-4">
-            <a href="{{ route('project.create') }}" class="btn btn-success w-100 fs-5">
-                + Aggiungi
-            </a>
-        </div>
-            <div class="thead">
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Titolo</th>
-                   
-                    <th scope="col">immagine</th>
-                    <th scope="col">descrizione</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Tipo</th>
-                   
-                </tr>
-            </div>
-            <div class="tbody">
-                
-                @foreach ($projects as $project)
+        <div class="col-md-12">
+            <a href="{{ route('project.create') }}" class="btn btn-success mb-3">Aggiungi</a>
+
+            <table class="table">
+                <thead>
                     <tr>
-                         <td scope="row"> 
-                            {{$comic->id}} 
-                        </td> 
-
-                        <td>{{ $project->title}}</td>
-                        <td>${{ $project->image}}</td>
-                        <td>{{ $project->description}}</td>
-                        <td>{{ $project->date}}</td>
-                        <td>{{ $project->type}}</td>
-                       
-                        <td>
-                            <a href="{{ route('admin.projects.create') }}" class="btn btn-primary mb-3">Crea Nuovo Progetto</a>
-                        </td>
-                        <td>
-                            <a href="{{ route('admin.projects.show', $project->slug) }}" class="text-decoration-none text-dark">
-                        </td>
+                        <th scope="col">#</th>
+                        <th scope="col">Titolo</th>
+                        <th scope="col">Immagine</th>
+                        <th scope="col">Descrizione</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">scegli</th>
                     </tr>
-                    
-                @endforeach
-            </div>
+                </thead>
+                <tbody>
+                    @foreach ($projects as $project)
+                        <tr>
+                            <td>{{ $project->id }}</td>
+                            <td>{{ $project->title }}</td>
+                            <td>{{ $project->image }}</td>
+                            <td>{{ $project->description }}</td>
+                            <td>{{ $project->date }}</td>
+                            <td>{{ $project->type }}</td>
+                            <td>
+                                <a href="{{ route('project.edit', $project->id) }}" class="btn btn-primary">Modifica</a>
+                                <form action="{{ route('project.destroy', $project->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Elimina</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+            </table>
         </div>
-    </div> 
-</h2>
+    </div>
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

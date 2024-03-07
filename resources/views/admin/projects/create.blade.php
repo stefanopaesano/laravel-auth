@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title', 'Tutti i post')
+@section('page-title', 'Tutti i projects')
 
 @section('main-content')
 <div class="container">
@@ -15,12 +15,9 @@
             </ul>
         </div>
     @endif
-
-    <form method="POST" action="{{ isset($project) ? route('admin.projects.update', $project->id) : route('admin.projects.store') }}">
+    <form method="POST" action="{{ route('admin.projects.store') }}">
         @csrf
-        @if(isset($project))
-            @method('PUT')
-        @endif
+        
 
         <!-- Form fields -->
 
@@ -41,7 +38,7 @@
 
         <div class="mb-3">
             <label for="date" class="form-label">Date</label>
-            <input type="date" class="form-control" id="date" name="date" value="{{ old('date', isset($project) ? $project->date->format('Y-m-d') : '') }}" required>
+            <input type="date" class="form-control" id="date" name="date" value="{{ old('date') }}" required>
         </div>
 
         <button type="submit" class="btn btn-primary">{{ isset($project) ? 'Update' : 'Submit' }}</button>
